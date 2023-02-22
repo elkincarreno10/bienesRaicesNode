@@ -1,0 +1,32 @@
+header.bg-indigo-600.p-4
+    .container.mx-auto.flex.justify-between.items-center(class='flex-col md:flex-row')
+        a(href='/')
+            h1.text-2xl.text-white.font-extrabold.text-center Bienes 
+                span.font-normal Raices
+        nav(class='my-5 text-sm flex flex-col md:flex-row md:items-center gap-3 font-bold text-white')
+            if !esUsuario
+                a(href='/auth/registro') Crear Cuenta
+                a(href='/auth/login') Iniciar Sesión
+            else 
+                a(href="/mis-propiedades") Mis Propiedades 
+                form(action="/auth/cerrar-sesion" method='POST') 
+                    input(type="hidden" name='_csrf' value=csrfToken)
+                    input(type='submit' class='bg-indigo-800 py-2 px-10 rounded-lg cursor-pointer' value='Cerrar Sesión')
+
+div(class='bg-indigo-700 py-5 flex flex-col lg:block space-y-3')
+    img(id='menu' src='/img/menu.png' class='w-10 cursor-pointer mx-auto md:hidden')
+    div(id='divMenu' class='container mx-auto flex justify-between md:flex-row')
+        nav(id='nav' class='hidden md:flex md:flex-row gap-4 items-center')
+            a(href='/categorias/1' class='text-sm font-bols uppercase text-white') Casas
+            a(href='/categorias/2' class='text-sm font-bols uppercase text-white') Departamentos
+            a(href='/categorias/3' class='text-sm font-bols uppercase text-white') Bodegas
+            a(href='/categorias/4' class='text-sm font-bols uppercase text-white') Terrenos
+            a(href='/categorias/5' class='text-sm font-bols uppercase text-white') Cabañas 
+        form(action="/buscador" method='POST' class='flex gap-4 items-center mx-auto md:mx-0') 
+            input(type='hidden' name='_csrf' value= csrfToken)
+            label(for='termino' class='text-sm uppercase font-bold text-white') Búsqueda
+            input(type='text' id='termino' name='termino' placeholder='Buscar Propiedades' class='p-2 rounded-lg shadow text-sm')
+
+            input(type='submit' class='bg-indigo-800 hover:bg-indigo-400 rounded-lg text-white uppercase font-bold p-2 cursor-pointer text-sm' value='Buscar')
+
+script(src='/js/menu.js')
